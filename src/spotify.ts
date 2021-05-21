@@ -7,15 +7,22 @@ export default class Spotify {
     })
 
     async authorize() {
-        const response = await this.client.clientCredentialsGrant()
-
-        this.client.setAccessToken(response.body.access_token)
-
+        try{
+            const response = await this.client.clientCredentialsGrant()
+            console.log(response);
+            this.client.setAccessToken(response.body.access_token);
+        }catch(err){
+            console.log(err, "authorize")
+        }
     }
 
     async getPlaylist(id: string) {
-        const result = await this.client.getPlaylistTracks(id)
-
-        return result.body.items.map(({ track }) => track)
+        console.log(id,'soy id');
+        try{
+            const result = await this.client.getPlaylistTracks(id);
+            return result.body.items.map(({ track }) => track);
+        }catch(err){
+            console.log(err);
+        }
     }
 }
