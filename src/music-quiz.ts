@@ -67,15 +67,15 @@ export class MusicQuiz {
         this.scores = {}
         this.textChannel.send(`
             **Let's get started**! :headphones: :tada:
-            **${this.songs.length}** songs have been selected randomly from the playlist.
-            You have one minute to guess each song.
+            **${this.songs.length}** Canciones han sido escogidas aleatoriamente  de la playlist
+            tienes un minuto para adivinarlas.
 
             ${this.pointText()}
 
-            Type \`${stopCommand}\` to vote for continuing to the next song.
-            Type \`${skipCommand}\` to stop the quiz.
+            Escribe \`${stopCommand}\` para detener el quiz
+            Escribe \`${skipCommand}\` para pasar a la siguiente cancion
 
-            - GLHF :microphone:
+            - Jara es un Dios
         `.replace(/  +/g, ''))
         this.startPlaying()
 
@@ -104,10 +104,9 @@ export class MusicQuiz {
         try {
             this.musicStream = await ytdl(link)
         } catch (e) {
-            console.error(e);
-
-            this.nextSong('Could not stream the song from Youtube. Skipping to next.')
-
+            console.error(e, "hola");
+            console.error(link, "soy el link")
+            this.nextSong('Could not stream the song from Youtube. Skipping to next. aaaaaaaaaaa' + e)
             return
         }
 
@@ -169,7 +168,7 @@ export class MusicQuiz {
         this.scores[message.author.id] = score
 
         if (this.titleGuessed && this.artistGuessed) {
-            this.nextSong('Song guessed!')
+            this.nextSong('Cancion adivinada!')
         }
 
         if (!correct) {
@@ -323,18 +322,27 @@ export class MusicQuiz {
 
     pointText(): string {
         if (this.arguments.only === 'artist') {
-            return 'Guess the artist of the song by typing in chat. When guessed corretly you are awarded **3 points**.'
+            //return 'Guess the artist of the song by typing in chat. When guessed corretly you are awarded **3 points**.'
+            return 'Adivina el artista de la cancion y ganaras **3 points**.'
         }
 
         if (this.arguments.only === 'title') {
-            return 'Guess the title of the song by typing in chat. When guessed corretly you are awarded **2 points**.'
+            //return 'Guess the title of the song by typing in chat. When guessed corretly you are awarded **2 points**.'
+            return 'Adivina el titulo titulo de la cancion y ganaras **2 points**.'
         }
 
-        return `
+        /*return `
             Guess the song and artist by typing in chat. Points are awarded as follows:
             > Artist - **3 points**
             > Title - **2 points**
             > Artist + title - **5 points**
+        `.replace(/  +/g, '')*/
+        return `
+            Adivina la cancion y el artista para ganar los siguientes puntos:
+            > Artista - **3 points**
+            > Titulo - **2 points**
+            > Artista + titulo - **5 points**
         `.replace(/  +/g, '')
+
     }
 }

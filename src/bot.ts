@@ -26,8 +26,8 @@ client.registry
 .registerCommand(MusicQuizCommand)
 
 client.once('ready', () => {
-    console.log('Ready!')
-    client.user.setActivity('Ready to quiz')
+    console.log('osi')
+    client.user.setActivity('Ser el simp de jara')
 })
 client.on("error", (e) => console.error('Discord error', e))
 client.on("warn", (e) => console.warn('Discord warn', e))
