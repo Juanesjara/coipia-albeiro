@@ -37,7 +37,7 @@ export class MusicQuizCommand extends Command {
 
     async run(message: CommandoMessage, args: QuizArgs, fromPattern: boolean): Promise<Message | Message[]> {
         if (message.guild.quiz) {
-            return message.say('Quiz is already running')
+            return message.say('ya hay un quiz corriendo')
         }
 
         if (message.member.voice.channel === null) {
