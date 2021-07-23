@@ -1,0 +1,1 @@
+{"version":3,"file":"score.js","sourceRoot":"src/","sources":["types/score.ts"],"names":[],"mappings":"","sourcesContent":["export interface Score {\r\n    userID: string\r\n    score: number\r\n}\r\n"]}

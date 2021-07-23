@@ -1,0 +1,1 @@
+{"version":3,"file":"song.js","sourceRoot":"src/","sources":["types/song.ts"],"names":[],"mappings":"","sourcesContent":["export interface Song {\r\n    link: string\r\n    previewUrl: string\r\n    title: string\r\n    artist: string\r\n}\r\n"]}

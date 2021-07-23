@@ -1,0 +1,1 @@
+{"version":3,"file":"quiz-args.js","sourceRoot":"src/","sources":["types/quiz-args.ts"],"names":[],"mappings":"","sourcesContent":["export interface QuizArgs {\r\n    playlist: string\r\n    songs: string\r\n    only: string\r\n}\r\n"]}
