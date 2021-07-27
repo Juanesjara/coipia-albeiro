@@ -7,7 +7,7 @@ export class MusicQuizCommand extends Command {
     constructor(client: CommandoClient) {
         super(client, {
             name: 'music-quiz',
-            memberName: 'music-quizzer',
+            memberName: 'music-quiz',
             group: 'music',
             description: 'Music Quiz from Spotify playlists',
             guildOnly: true,

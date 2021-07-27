@@ -10,8 +10,8 @@ import internal from 'stream'
 import { StreamDispatcher } from 'discord.js';
 import { NewsChannel } from 'discord.js';
 
-const stopCommand = '!stop'
-const skipCommand = '!skip'
+const stopCommand = ';stop'
+const skipCommand = ';skip'
 
 export class MusicQuiz {
     guild: Guild
@@ -46,7 +46,7 @@ export class MusicQuiz {
 
         if (!this.songs || this.songs.length === 0) {
             if (this.songs && this.songs.length === 0) {
-                await this.textChannel.send('Playlist contains no songs')
+                await this.textChannel.send('Esta playlist no contiene Canciones')
             }
 
             this.finish()
@@ -57,7 +57,7 @@ export class MusicQuiz {
         try {
             this.connection = await this.voiceChannel.join()
         } catch (e) {
-            await this.textChannel.send('Could not join voice channel. Is it full?')
+            await this.textChannel.send('No me pude unir a tu canal, verifica que no este lleno')
             await this.finish()
 
             return
@@ -96,7 +96,7 @@ export class MusicQuiz {
         const song = this.songs[this.currentSong]
         const link = await this.findSong(song)
         if (!link) {
-            this.nextSong('Could not find the song on Youtube. Skipping to next.')
+            this.nextSong('No pude encontrar esta canción en youtube, voy a pasar a la siguiente')
 
             return
         }
@@ -106,12 +106,12 @@ export class MusicQuiz {
         } catch (e) {
             console.error(e, "hola");
             console.error(link, "soy el link")
-            this.nextSong('Could not stream the song from Youtube. Skipping to next. aaaaaaaaaaa' + e)
+            this.nextSong('No pude reproducir esta canción en youtube, voy a pasar a la siguiente')
             return
         }
 
         this.songTimeout = setTimeout(() => {
-            this.nextSong('Song was not guessed in time')
+            this.nextSong('no adivinaron la cancion :/')
         }, 1000 * 60);
 
         try {
@@ -246,7 +246,7 @@ export class MusicQuiz {
                     position = ':third_place:'
                 }
 
-                return `${position} <@!${member.id}> ${this.scores[member.id] || 0} points`
+                return `${position} <@!${member.id}> ${this.scores[member.id] || 0} puntos`
             })
             .join('\n')
     }
@@ -261,8 +261,8 @@ export class MusicQuiz {
 
             this.reactPermissionNotified = true
             this.textChannel.send(`
-                Please give me permission to react to messages.
-                You can easily do this by clicking the following link and adding me to your server again.
+                Te pido el favor de que me dejes reaccionar a mensajes, o
+                puedes hacer esto facilmente haciendo click en el enlace e invitandome de nuevo a su servidor
                 https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&scope=bot&permissions=3147840
             `.replace(/  +/g, ''))
         }
@@ -287,7 +287,8 @@ export class MusicQuiz {
                     artist: (song.artists[0] || {}).name
                 }))
         } catch (error) {
-            this.textChannel.send('Could not retrieve the playlist. Make sure it\'s public')
+
+            this.textChannel.send('No pude extraer ninguna cancion de esta playlist, asegurate de que sea publica')
 
             return null
         }
@@ -300,7 +301,7 @@ export class MusicQuiz {
 
             return result?.link ?? null
         } catch (e) {
-            await this.textChannel.send('Oh no... Youtube police busted the party :(\nPlease try again later.')
+            await this.textChannel.send("youtube nos daño el juego, intenta de nuevo")
             this.finish()
 
             throw e
@@ -323,12 +324,12 @@ export class MusicQuiz {
     pointText(): string {
         if (this.arguments.only === 'artist') {
             //return 'Guess the artist of the song by typing in chat. When guessed corretly you are awarded **3 points**.'
-            return 'Adivina el artista de la cancion y ganaras **3 points**.'
+            return 'Adivina el artista de la cancion y ganaras **3 puntos**.'
         }
 
         if (this.arguments.only === 'title') {
             //return 'Guess the title of the song by typing in chat. When guessed corretly you are awarded **2 points**.'
-            return 'Adivina el titulo titulo de la cancion y ganaras **2 points**.'
+            return 'Adivina el titulo titulo de la cancion y ganaras **2 puntos**.'
         }
 
         /*return `
@@ -339,9 +340,9 @@ export class MusicQuiz {
         `.replace(/  +/g, '')*/
         return `
             Adivina la cancion y el artista para ganar los siguientes puntos:
-            > Artista - **3 points**
-            > Titulo - **2 points**
-            > Artista + titulo - **5 points**
+            > Artista - **3 puntos**
+            > Titulo - **2 puntos**
+            > Artista + titulo - **5 puntos**
         `.replace(/  +/g, '')
 
     }
