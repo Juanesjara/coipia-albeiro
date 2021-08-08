@@ -16,7 +16,7 @@ class MusicQuizCommand extends discord_js_commando_1.Command {
     constructor(client) {
         super(client, {
             name: 'music-quiz',
-            memberName: 'music-quizzer',
+            memberName: 'music-quiz',
             group: 'music',
             description: 'Music Quiz from Spotify playlists',
             guildOnly: true,
@@ -46,7 +46,7 @@ class MusicQuizCommand extends discord_js_commando_1.Command {
     run(message, args, fromPattern) {
         return __awaiter(this, void 0, void 0, function* () {
             if (message.guild.quiz) {
-                return message.say('Quiz is already running');
+                return message.say('ya hay un quiz corriendo');
             }
             if (message.member.voice.channel === null) {
                 return message.say('conectate a un canal de voz elton');

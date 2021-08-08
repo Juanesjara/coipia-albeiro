@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "tsc && node dist/index.js",
+    "postinstall": "npm run build",
+    "start-dev": "tsc && node dist/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +21,7 @@
     "ffmpeg-static": "^4.2.7",
     "scrape-youtube": "^0.2.6",
     "spotify-web-api-node": "^4.0.0",
+    "ytdl-core": "^4.9.1",
     "ytdl-core-discord": "*"
   },
   "devDependencies": {

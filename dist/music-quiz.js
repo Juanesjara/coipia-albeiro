@@ -16,8 +16,8 @@ exports.MusicQuiz = void 0;
 const ytdl_core_discord_1 = __importDefault(require("ytdl-core-discord"));
 const spotify_1 = __importDefault(require("./spotify"));
 const scrape_youtube_1 = __importDefault(require("scrape-youtube"));
-const stopCommand = '!stop';
-const skipCommand = '!skip';
+const stopCommand = ';stop';
+const skipCommand = ';skip';
 class MusicQuiz {
     constructor(message, args) {
         this.currentSong = 0;
@@ -33,7 +33,7 @@ class MusicQuiz {
             this.songs = yield this.getSongs(this.arguments.playlist, parseInt(this.arguments.songs, 10));
             if (!this.songs || this.songs.length === 0) {
                 if (this.songs && this.songs.length === 0) {
-                    yield this.textChannel.send('Playlist contains no songs');
+                    yield this.textChannel.send('Esta playlist no contiene Canciones');
                 }
                 this.finish();
                 return;
@@ -42,7 +42,7 @@ class MusicQuiz {
                 this.connection = yield this.voiceChannel.join();
             }
             catch (e) {
-                yield this.textChannel.send('Could not join voice channel. Is it full?');
+                yield this.textChannel.send('No me pude unir a tu canal, verifica que no este lleno');
                 yield this.finish();
                 return;
             }
@@ -79,7 +79,7 @@ class MusicQuiz {
             const song = this.songs[this.currentSong];
             const link = yield this.findSong(song);
             if (!link) {
-                this.nextSong('Could not find the song on Youtube. Skipping to next.');
+                this.nextSong('No pude encontrar esta canción en youtube, voy a pasar a la siguiente');
                 return;
             }
             try {
@@ -88,11 +88,11 @@ class MusicQuiz {
             catch (e) {
                 console.error(e, "hola");
                 console.error(link, "soy el link");
-                this.nextSong('Could not stream the song from Youtube. Skipping to next. aaaaaaaaaaa' + e);
+                this.nextSong('No pude reproducir esta canción en youtube, voy a pasar a la siguiente');
                 return;
             }
             this.songTimeout = setTimeout(() => {
-                this.nextSong('Song was not guessed in time');
+                this.nextSong('no adivinaron la cancion :/');
             }, 1000 * 60);
             try {
                 this.voiceStream = this.connection.play(this.musicStream, { type: 'opus', volume: .5 });
@@ -129,20 +129,23 @@ class MusicQuiz {
                 score = score + 2;
                 this.titleGuessed = true;
                 correct = true;
-                yield this.reactToMessage(message, '☑');
+                yield this.reactToMessage(message, '😈');
+                message.channel.send(`Listo el Pollo`);
             }
             if (!this.artistGuessed && content.includes(song.artist.toLowerCase())) {
                 score = score + 3;
                 this.artistGuessed = true;
                 correct = true;
-                yield this.reactToMessage(message, '☑');
+                yield this.reactToMessage(message, '😈');
+                message.channel.send(`Listo el Pollo`);
             }
             this.scores[message.author.id] = score;
             if (this.titleGuessed && this.artistGuessed) {
-                this.nextSong('Cancion adivinada!');
+                this.nextSong('Listo el Pollo');
             }
             if (!correct) {
-                yield this.reactToMessage(message, '❌');
+                yield this.reactToMessage(message, `😡`);
+                message.channel.send(`te falta calcio`);
             }
         });
     }
@@ -218,7 +221,7 @@ class MusicQuiz {
             else if (index === 2) {
                 position = ':third_place:';
             }
-            return `${position} <@!${member.id}> ${this.scores[member.id] || 0} points`;
+            return `${position} <@!${member.id}> ${this.scores[member.id] || 0} puntos`;
         })
             .join('\n');
     }
@@ -233,8 +236,8 @@ class MusicQuiz {
                 }
                 this.reactPermissionNotified = true;
                 this.textChannel.send(`
-                Please give me permission to react to messages.
-                You can easily do this by clicking the following link and adding me to your server again.
+                Te pido el favor de que me dejes reaccionar a mensajes, o
+                puedes hacer esto facilmente haciendo click en el enlace e invitandome de nuevo a su servidor
                 https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&scope=bot&permissions=3147840
             `.replace(/  +/g, ''));
             }
@@ -259,7 +262,7 @@ class MusicQuiz {
                 }));
             }
             catch (error) {
-                this.textChannel.send('Could not retrieve the playlist. Make sure it\'s public');
+                this.textChannel.send('No pude extraer ninguna cancion de esta playlist, asegurate de que sea publica');
                 return null;
             }
         });
@@ -273,7 +276,7 @@ class MusicQuiz {
                 return (_a = result === null || result === void 0 ? void 0 : result.link) !== null && _a !== void 0 ? _a : null;
             }
             catch (e) {
-                yield this.textChannel.send('Oh no... Youtube police busted the party :(\nPlease try again later.');
+                yield this.textChannel.send("youtube nos daño el juego, intenta de nuevo");
                 this.finish();
                 throw e;
             }
@@ -294,11 +297,11 @@ class MusicQuiz {
     pointText() {
         if (this.arguments.only === 'artist') {
             //return 'Guess the artist of the song by typing in chat. When guessed corretly you are awarded **3 points**.'
-            return 'Adivina el artista de la cancion y ganaras **3 points**.';
+            return 'Adivina el artista de la cancion y ganaras **3 puntos**.';
         }
         if (this.arguments.only === 'title') {
             //return 'Guess the title of the song by typing in chat. When guessed corretly you are awarded **2 points**.'
-            return 'Adivina el titulo titulo de la cancion y ganaras **2 points**.';
+            return 'Adivina el titulo titulo de la cancion y ganaras **2 puntos**.';
         }
         /*return `
             Guess the song and artist by typing in chat. Points are awarded as follows:
@@ -308,9 +311,9 @@ class MusicQuiz {
         `.replace(/  +/g, '')*/
         return `
             Adivina la cancion y el artista para ganar los siguientes puntos:
-            > Artista - **3 points**
-            > Titulo - **2 points**
-            > Artista + titulo - **5 points**
+            > Artista - **3 puntos**
+            > Titulo - **2 puntos**
+            > Artista + titulo - **5 puntos**
         `.replace(/  +/g, '');
     }
 }

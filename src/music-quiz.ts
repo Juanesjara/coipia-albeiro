@@ -156,23 +156,28 @@ export class MusicQuiz {
             score = score + 2
             this.titleGuessed = true
             correct = true
-            await this.reactToMessage(message, '☑')
+            await this.reactToMessage(message, '😈')
+            message.channel.send(`Listo el Pollo`);
         }
 
         if (!this.artistGuessed && content.includes(song.artist.toLowerCase())) {
             score = score + 3
             this.artistGuessed = true
             correct = true
-            await this.reactToMessage(message, '☑')
+            await this.reactToMessage(message, '😈')
+            message.channel.send(`Listo el Pollo`);
+            
         }
         this.scores[message.author.id] = score
 
         if (this.titleGuessed && this.artistGuessed) {
-            this.nextSong('Cancion adivinada!')
+            this.nextSong('Listo el Pollo');
         }
 
         if (!correct) {
-            await this.reactToMessage(message, '❌')
+            await this.reactToMessage(message, `😡`)
+            message.channel.send(`te falta calcio`);
+            
         }
     }
 
