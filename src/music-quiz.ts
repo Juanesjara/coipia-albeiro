@@ -10,8 +10,8 @@ import internal from 'stream'
 import { StreamDispatcher } from 'discord.js';
 import { NewsChannel } from 'discord.js';
 
-const stopCommand = ';stop'
-const skipCommand = ';skip'
+const stopCommand = '=stop'
+const skipCommand = '=skip'
 
 export class MusicQuiz {
     guild: Guild
@@ -178,7 +178,7 @@ export class MusicQuiz {
 
         if (!correct) {
             await this.reactToMessage(message, `😡`)
-            message.channel.send(`te falta calcio`);
+            message.channel.send(`Oigan pues`);
             
         }
     }
