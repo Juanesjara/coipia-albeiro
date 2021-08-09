@@ -49,7 +49,7 @@ class MusicQuizCommand extends discord_js_commando_1.Command {
                 return message.say('ya hay un quiz corriendo');
             }
             if (message.member.voice.channel === null) {
-                return message.say('conectate a un canal de voz elton');
+                return message.say('conectate a un canal de voz  ome elton');
             }
             message.guild.quiz = new music_quiz_1.MusicQuiz(message, args);
             try {

@@ -97,7 +97,7 @@ class MusicQuiz {
             try {
                 this.voiceStream = this.connection.play(this.musicStream, { type: 'opus', volume: .5 });
                 this.voiceStream.on('error', () => {
-                    this.textChannel.send('Connection got interrupted. Please try again');
+                    this.textChannel.send('Jm pana me toste, Hasta mañana 🥵');
                     this.finish();
                 });
                 this.voiceStream.on('finish', () => this.finish());
@@ -105,7 +105,7 @@ class MusicQuiz {
             }
             catch (e) {
                 console.error(e);
-                this.textChannel.send('Connection got interrupted. Please try again');
+                this.textChannel.send('Jm pana me toste, Hasta mañana 🥵');
                 this.finish();
             }
         });

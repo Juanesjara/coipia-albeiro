@@ -20,8 +20,8 @@
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
     "scrape-youtube": "^0.2.6",
-    "spotify-web-api-node": "^4.0.0",
-    "ytdl-core": "*",
+    "spotify-web-api-node": "*",
+    "ytdl-core": "^4.9.1",
     "ytdl-core-discord": "*"
   },
   "devDependencies": {
