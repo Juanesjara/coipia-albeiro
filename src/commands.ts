@@ -41,7 +41,7 @@ export class MusicQuizCommand extends Command {
         }
 
         if (message.member.voice.channel === null) {
-            return message.say('conectate a un canal de voz elton')
+            return message.say('conectate a un canal de voz  ome elton')
         }
 
         message.guild.quiz = new MusicQuiz(message, args)
