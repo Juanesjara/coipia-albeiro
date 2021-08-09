@@ -157,6 +157,7 @@ export class MusicQuiz {
             this.titleGuessed = true
             correct = true
             await this.reactToMessage(message, '😈')
+            await this.reactToMessage(message, '✅')
             message.channel.send(`Listo el Pollo`);
         }
 
@@ -165,6 +166,7 @@ export class MusicQuiz {
             this.artistGuessed = true
             correct = true
             await this.reactToMessage(message, '😈')
+            await this.reactToMessage(message, '✅')
             message.channel.send(`Listo el Pollo`);
             
         }
