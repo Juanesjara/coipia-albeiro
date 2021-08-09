@@ -16,8 +16,8 @@ exports.MusicQuiz = void 0;
 const ytdl_core_discord_1 = __importDefault(require("ytdl-core-discord"));
 const spotify_1 = __importDefault(require("./spotify"));
 const scrape_youtube_1 = __importDefault(require("scrape-youtube"));
-const stopCommand = ';stop';
-const skipCommand = ';skip';
+const stopCommand = '=stop';
+const skipCommand = '=skip';
 class MusicQuiz {
     constructor(message, args) {
         this.currentSong = 0;
@@ -130,6 +130,7 @@ class MusicQuiz {
                 this.titleGuessed = true;
                 correct = true;
                 yield this.reactToMessage(message, '😈');
+                yield this.reactToMessage(message, '✅');
                 message.channel.send(`Listo el Pollo`);
             }
             if (!this.artistGuessed && content.includes(song.artist.toLowerCase())) {
@@ -137,6 +138,7 @@ class MusicQuiz {
                 this.artistGuessed = true;
                 correct = true;
                 yield this.reactToMessage(message, '😈');
+                yield this.reactToMessage(message, '✅');
                 message.channel.send(`Listo el Pollo`);
             }
             this.scores[message.author.id] = score;
@@ -145,7 +147,7 @@ class MusicQuiz {
             }
             if (!correct) {
                 yield this.reactToMessage(message, `😡`);
-                message.channel.send(`te falta calcio`);
+                message.channel.send(`Oigan pues`);
             }
         });
     }
