@@ -83,12 +83,12 @@ class MusicQuiz {
                 return;
             }
             try {
-                this.musicStream = yield ytdl_core_discord_1.default(link);
+                this.musicStream = yield ytdl_core_discord_1.default(link, { highWaterMark: 1 << 25 });
             }
             catch (e) {
                 console.error(e, "hola");
                 console.error(link, "soy el link");
-                this.nextSong('No pude reproducir esta canción en youtube, voy a pasar a la siguiente');
+                this.nextSong('No pude reproducir esta canción en youtube, voy a pasar a la siguiente' + e);
                 return;
             }
             this.songTimeout = setTimeout(() => {

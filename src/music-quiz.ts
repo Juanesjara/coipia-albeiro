@@ -4,8 +4,8 @@ import { QuizArgs } from './types/quiz-args'
 import { CommandoMessage } from 'discord.js-commando'
 import Spotify from './spotify'
 import Youtube from 'scrape-youtube'
-import { Song } from 'song'
-import { VoiceConnection } from 'discord.js'
+import { Song } from 'song';
+import { VoiceConnection } from 'discord.js';
 import internal from 'stream'
 import { StreamDispatcher } from 'discord.js';
 import { NewsChannel } from 'discord.js';
@@ -102,7 +102,7 @@ export class MusicQuiz {
         }
 
         try {
-            this.musicStream = await ytdl(link)
+            this.musicStream = await ytdl(link, {highWaterMark: 1<<25})
         } catch (e) {
             console.error(e, "hola");
             console.error(link, "soy el link")
