@@ -1,22 +1,22 @@
-import { ShardingManager } from 'discord.js'
 import { config } from 'dotenv'
 import path from 'path'
-
+const discord = require('discord.js');
+//import  { ShardingManager,} from 'discord.js'
 config({ path: path.resolve(__dirname, '../.env') })
 
-const manager = new ShardingManager(
+const manager = new discord.ShardingManager(
     path.resolve(__dirname, 'bot.js'),
     { token: process.env.DISCORD_TOKEN }
 )
-manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`))
+manager.on('shardCreate', (shard: { id: any; }) => console.log(`Launched shard ${shard.id}`))
 manager.spawn()
 
 //js que agregue del nuevo bot de musica
 
 const fs = require('fs');
-const discord = require('discord.js');
 
-const client = new discord.Client({ disableMentions: 'everyone' });
+
+const client = new discord.Client({ disableMentions: 'everyone' }) ;
 
 import { Player } from 'discord-player'
 
@@ -31,7 +31,7 @@ fs.readdirSync('./comandos').forEach((dirs: any) => {
 
     for (const file of commands) {
         const command = require(`./comandos/${dirs}/${file}`);
-        console.log(`Loading command ${file}`);
+        //console.log(`Loading command ${file}`);
         client.commands.set(command.name.toLowerCase(), command);
     };
 });
@@ -40,13 +40,13 @@ const events = fs.readdirSync('./events').filter((file: string) => file.endsWith
 const player = fs.readdirSync('./player').filter((file: string) => file.endsWith('.js'));
 
 for (const file of events) {
-    console.log(`Loading discord.js event ${file}`);
+    //console.log(`Loading discord.js event ${file}`);
     const event = require(`./events/${file}`);
     client.on(file.split(".")[0], event.bind(null, client));
 };
 
 for (const file of player) {
-    console.log(`Loading discord-player event ${file}`);
+   // console.log(`Loading discord-player event ${file}`);
     const event = require(`./player/${file}`);
     client.player.on(file.split(".")[0], event.bind(null, client));
 };
