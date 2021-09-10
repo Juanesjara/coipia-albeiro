@@ -18,7 +18,12 @@ module.exports = {
         console.log(numero[1], "soy el numero")
         cancionBorrada = queue.tracks.splice(parseInt(numero[1])-1, 1)
         console.log(cancionBorrada)
-        message.channel.send(`Cancion ${cancionBorrada[0].title} borrada de la cola`)
+        if(cancionBorrada.length == 0){
+            message.channel.send(`no podes borrar esa cancion tonto`)
+
+        }else{
+            message.channel.send(`Cancion ${cancionBorrada[0].title} borrada de la cola`)
+        }
         
 
        /* message.channel.send(`**Server queue - ${message.guild.name} ${client.emotes.queue} ${client.player.getQueue(message).loopMode ? '(looped)' : ''}**\nCurrent : ${queue.playing.title} | ${queue.playing.author}\n\n` + (queue.tracks.map((track, i) => {
