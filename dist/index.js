@@ -20,6 +20,13 @@ client.config = require('./config/bot');
 client.emotes = client.config.emojis;
 client.filters = client.config.filters;
 client.commands = new discord.Collection();
+client.on('message', (message) => {
+    const args = message.content.trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+    if (command === '13') {
+        message.channel.send(`mientras mas me la mama mas me crece`);
+    }
+});
 fs.readdirSync('./comandos').forEach((dirs) => {
     const commands = fs.readdirSync(`./comandos/${dirs}`).filter((files) => files.endsWith('.js'));
     for (const file of commands) {

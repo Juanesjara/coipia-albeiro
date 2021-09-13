@@ -20,7 +20,6 @@ module.exports = {
         console.log(cancionBorrada)
         if(cancionBorrada.length == 0){
             message.channel.send(`no podes borrar esa cancion tonto`)
-
         }else{
             message.channel.send(`Cancion ${cancionBorrada[0].title} borrada de la cola`)
         }
