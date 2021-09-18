@@ -8,7 +8,7 @@ module.exports = {
     },
     discord: {
         token: 'ODQ1MDY5ODUyMTAwMjYzOTY3.YKbmoQ.rKCZUBLracZFDsNUZ-a-ahePW-g',
-        prefix: '=',
+        prefix: '-',
         activity: 'ACTIVITY',
     },
     filters: ['8D', 'gate', 'haas', 'phaser', 'treble', 'tremolo', 'vibrato', 'reverse', 'karaoke', 'flanger', 'mcompand', 'pulsator', 'subboost', 'bassboost', 'vaporwave', 'nightcore', 'normalizer', 'surrounding'],
