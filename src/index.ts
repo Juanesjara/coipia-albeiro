@@ -35,6 +35,36 @@ client.on('message', (message: { content: string; channel: { send: (arg0: string
     }
 });
 
+client.on('voiceStateUpdate', (oldState: any, newState: any) => {
+
+    //console.log("oldsate",oldState.channel)
+    // console.log("oldsate",oldState.guild)
+    
+    //console.log("new channel",newState.channels)
+    //console.log("new",newState.guild)
+    
+    var channel = oldState.guild.me.voice.channelID;
+    var channelx = newState.channel;
+    console.log("channel oldstate", channel)
+    console.log("soy oldstate.id",oldState.id)
+    console.log("soy newstate.channel", newState.channel?.id)
+    //console.log("channel new state", channelx)
+
+    // if nobody left the channel in question, return.
+    if (oldState.id !==  oldState.guild.me.voice.channelID || newState.channel?.id){
+        console.log("pase por el return")
+        return;
+    }
+  
+    // otherwise, check how many people are in the channel now
+    if (!oldState.channel.members.size as any - 1) {
+        setTimeout(() => { // if 1 (you), wait five minutes
+            if (!oldState.channel.members.size as any - 1) // if there's still 1 member, 
+            oldState.channel.leave(); // leave
+        }, 300000); // (5 min in ms)
+    }
+  })
+
 fs.readdirSync('./comandos').forEach((dirs: any) => {
     const commands = fs.readdirSync(`./comandos/${dirs}`).filter((files: string) => files.endsWith('.js'));
 

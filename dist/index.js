@@ -27,6 +27,31 @@ client.on('message', (message) => {
         message.channel.send(`mientras mas me la mama mas me crece`);
     }
 });
+client.on('voiceStateUpdate', (oldState, newState) => {
+    //console.log("oldsate",oldState.channel)
+    // console.log("oldsate",oldState.guild)
+    var _a, _b;
+    //console.log("new channel",newState.channels)
+    //console.log("new",newState.guild)
+    var channel = oldState.guild.me.voice.channelID;
+    var channelx = newState.channel;
+    console.log("channel oldstate", channel);
+    console.log("soy oldstate.id", oldState.id);
+    console.log("soy newstate.channel", (_a = newState.channel) === null || _a === void 0 ? void 0 : _a.id);
+    //console.log("channel new state", channelx)
+    // if nobody left the channel in question, return.
+    if (oldState.id !== oldState.guild.me.voice.channelID || ((_b = newState.channel) === null || _b === void 0 ? void 0 : _b.id)) {
+        console.log("pase por el return");
+        return;
+    }
+    // otherwise, check how many people are in the channel now
+    if (!oldState.channel.members.size - 1) {
+        setTimeout(() => {
+            if (!oldState.channel.members.size - 1) // if there's still 1 member, 
+                oldState.channel.leave(); // leave
+        }, 300000); // (5 min in ms)
+    }
+});
 fs.readdirSync('./comandos').forEach((dirs) => {
     const commands = fs.readdirSync(`./comandos/${dirs}`).filter((files) => files.endsWith('.js'));
     for (const file of commands) {
