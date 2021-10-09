@@ -178,7 +178,7 @@ export class MusicQuiz {
 
         if (!correct) {
             await this.reactToMessage(message, `😡`)
-            message.channel.send(`Oigan pues`);
+            message.channel.send(`Oigan pues, pero manin es aguevado`);
             
         }
     }
