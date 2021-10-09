@@ -147,7 +147,7 @@ class MusicQuiz {
             }
             if (!correct) {
                 yield this.reactToMessage(message, `😡`);
-                message.channel.send(`Oigan pues`);
+                message.channel.send(`Oigan pues, manin es aguevado`);
             }
         });
     }

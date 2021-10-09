@@ -13,7 +13,7 @@ module.exports = {
         console.log(message.content, " soy message");
         if (message.content == "-p musica para recordar al yeico") {
             console.log("entre if");
-            client.player.play(message, "https://open.spotify.com/playlist/2MkjoPAFJqq5dLMSWstp5Y?si=226e3cf876714937");
+            client.player.play(message, "https://open.spotify.com/playlist/2MkjoPAFJqq5dLMSWstp5Y?si=226e3cf876714937", "https://open.spotify.com/playlist/2MkjoPAFJqq5dLMSWstp5Y?si=226e3cf876714937");
         }
         else {
             console.log("soy else");
