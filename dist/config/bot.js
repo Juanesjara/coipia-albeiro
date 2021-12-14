@@ -5,6 +5,7 @@ module.exports = {
         queue: ':bar_chart:',
         music: ':musical_note:',
         success: ':white_check_mark:',
+        si: "si"
     },
     discord: {
         token: 'ODQ1MDY5ODUyMTAwMjYzOTY3.YKbmoQ.rKCZUBLracZFDsNUZ-a-ahePW-g',
