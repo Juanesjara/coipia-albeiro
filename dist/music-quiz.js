@@ -139,7 +139,7 @@ class MusicQuiz {
                 correct = true;
                 yield this.reactToMessage(message, '😈');
                 yield this.reactToMessage(message, '✅');
-                
+                message.channel.send(`Correcto`);
             }
             this.scores[message.author.id] = score;
             if (this.titleGuessed && this.artistGuessed) {
