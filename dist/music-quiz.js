@@ -131,7 +131,7 @@ class MusicQuiz {
                 correct = true;
                 yield this.reactToMessage(message, '😈');
                 yield this.reactToMessage(message, '✅');
-                message.channel.send(`Listo el Pollo`);
+
             }
             if (!this.artistGuessed && content.includes(song.artist.toLowerCase())) {
                 score = score + 3;
@@ -139,7 +139,7 @@ class MusicQuiz {
                 correct = true;
                 yield this.reactToMessage(message, '😈');
                 yield this.reactToMessage(message, '✅');
-                message.channel.send(`Listo el Pollo`);
+                
             }
             this.scores[message.author.id] = score;
             if (this.titleGuessed && this.artistGuessed) {
@@ -147,7 +147,7 @@ class MusicQuiz {
             }
             if (!correct) {
                 yield this.reactToMessage(message, `😡`);
-                message.channel.send(`Oigan pues, ${message.author} es aguevado`);
+                message.channel.send(`Oigan pues, ${message.author} es aguevado.`);
             }
         });
     }
