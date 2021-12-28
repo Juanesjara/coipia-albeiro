@@ -158,7 +158,7 @@ export class MusicQuiz {
             correct = true
             await this.reactToMessage(message, '😈')
             await this.reactToMessage(message, '✅')
-            message.channel.send(`Listo el Pollo`);
+            
         }
 
         if (!this.artistGuessed && content.includes(song.artist.toLowerCase())) {
@@ -167,7 +167,7 @@ export class MusicQuiz {
             correct = true
             await this.reactToMessage(message, '😈')
             await this.reactToMessage(message, '✅')
-            message.channel.send(`Listo el Pollo`);
+            
             
         }
         this.scores[message.author.id] = score
@@ -178,7 +178,7 @@ export class MusicQuiz {
 
         if (!correct) {
             await this.reactToMessage(message, `😡`)
-            message.channel.send(`Oigan pues, manin es aguevado`);
+            message.channel.send(`Oigan pues, ${message.author} es tonto`);
             
         }
     }
