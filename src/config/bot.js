@@ -9,7 +9,7 @@ module.exports = {
     },
 
     discord: {
-        token: 'ODQ1MDY5ODUyMTAwMjYzOTY3.YKbmoQ.rKCZUBLracZFDsNUZ-a-ahePW-g',
+        token: '',
         prefix: '-',
         activity: 'ACTIVITY',
     },
